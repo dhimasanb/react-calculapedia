@@ -1,26 +1,22 @@
 import React, { Component } from "react";
-import "./App.css";
+import { Layout, Icon } from "antd";
 import Home from "./Home";
-import { Layout, Menu, Breadcrumb } from "antd/lib";
-
-const { Header, Footer, Sider, Content } = Layout;
+import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-      <Home/>
-        {/* <Layout className="layout">
-          <Content style={{ padding: "0 50px" }}>
-            <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-              <Home/>
-            </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
-        </Layout> */}
-      </div>
+      <Layout className="App">
+        <Layout.Content>
+          <div className="box">
+            <Home />
+          </div>
+        </Layout.Content>
+        <Layout.Footer>
+          <Icon type="code" /> with <Icon type="heart" /> by
+          <a href="https://github.com/dhimasanb"> @dhimasanb</a>
+        </Layout.Footer>
+      </Layout>
     );
   }
 }

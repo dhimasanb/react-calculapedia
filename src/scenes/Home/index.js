@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Input, Button, Typography, Row, Col, message } from "antd/lib";
-import "./index.css";
 import TableResult from "./components/Table";
 import { validationAmount } from "../../utils/helpers";
 import { fractions } from "../../config/fractions";
@@ -9,17 +8,18 @@ class Home extends Component {
   state = {
     amount: "",
     amountLeft: null,
+    loading: false,
     error: false,
     errorMessage: "",
     result: []
   };
 
-  componentDidUpdate() {
-    // Check if input
-    if (this.state.error) {
-      message.error(this.state.errorMessage, 5);
-    }
-  }
+  // componentDidUpdate() {
+  //   // Check if input
+  //   if (this.state.error) {
+  //     message.error(this.state.errorMessage, 5);
+  //   }
+  // }
 
   // Event update the react state when user types
   handleChange = name => event => {
@@ -35,6 +35,8 @@ class Home extends Component {
 
   // Function to calculate fraction rupiah
   calculateFractions = () => {
+    this.setState({ loading: true });
+
     let amount = parseInt(this.state.amount);
     let temp = [];
     let result = [];
@@ -72,6 +74,11 @@ class Home extends Component {
       resultByOrder--;
     });
 
+    // Loading progress
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 400);
+
     this.setState({ amountLeft: amount, result: result });
   };
 
@@ -79,18 +86,16 @@ class Home extends Component {
     const { amount, result, amountLeft } = this.state;
 
     return (
-      <div className="todoContainer">
+      <div style={{ textAlign: "center", paddingTop: "calc(50vh - 166px)" }}>
         <Row>
           <Col span={24}>
-            <Typography.Title>
-              Aplikasi Penghitung Pecahan Rupiah
-            </Typography.Title>
+            <Typography.Title>Fraction App</Typography.Title>
           </Col>
         </Row>
         <Row>
           <Col span={20}>
             <Input
-              placeholder="What needs to be done?"
+              placeholder="Please input amount of money :)"
               value={amount}
               onChange={this.handleChange("amount")}
               onKeyPress={this.handleKeyPressEnter}
@@ -101,6 +106,8 @@ class Home extends Component {
               type="primary"
               disabled={amount === ""}
               onClick={() => this.calculateFractions()}
+              icon="calculator"
+              loading={this.state.loading}
             >
               Calculate
             </Button>
