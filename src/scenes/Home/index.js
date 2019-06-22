@@ -8,7 +8,6 @@ class Home extends Component {
   state = {
     amount: "",
     amountLeft: null,
-    loading: false,
     error: false,
     errorMessage: "",
     result: []
@@ -35,26 +34,21 @@ class Home extends Component {
 
   // Function to calculate fraction rupiah
   calculateFractions = () => {
-    this.setState({ loading: true });
-
-    let amount = parseInt(this.state.amount);
+    let amount = this.state.amount;
     let temp = [];
     let result = [];
 
     // Function to validation amount
-    const validation = validationAmount(this.state.amount);
+    const validatedAmount = validationAmount(amount);
 
-    console.log("validation", validation);
-
-    if (validation.error) {
+    if (validatedAmount.error) {
       return this.setState({
-        calculate: false,
-        error: validation.error,
-        errorMessage: validation.message
+        error: validatedAmount.error,
+        errorMessage: validatedAmount.message
       });
     }
 
-    amount = validation;
+    amount = validatedAmount;
 
     // Calculate the minimun fraction of rupiah currency
     while (amount >= 50) {
@@ -74,11 +68,6 @@ class Home extends Component {
       resultByOrder--;
     });
 
-    // Loading progress
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 400);
-
     this.setState({ amountLeft: amount, result: result });
   };
 
@@ -95,6 +84,7 @@ class Home extends Component {
         <Row>
           <Col span={20}>
             <Input
+              id="input-amount"
               placeholder="Please input amount of money :)"
               value={amount}
               onChange={this.handleChange("amount")}
@@ -103,6 +93,7 @@ class Home extends Component {
           </Col>
           <Col span={4}>
             <Button
+              id="btn-calculate"
               type="primary"
               disabled={amount === ""}
               onClick={() => this.calculateFractions()}

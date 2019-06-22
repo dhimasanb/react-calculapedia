@@ -24,9 +24,9 @@ function TableResult(props) {
       width: 200
     },
     {
-      title: "Cash",
-      dataIndex: "cash",
-      key: "cash",
+      title: "Rupiah",
+      dataIndex: "rupiah",
+      key: "rupiah",
       width: 200
     }
   ];
@@ -39,7 +39,7 @@ function TableResult(props) {
         key: index,
         no: number++,
         quantity: data.total,
-        cash: "Rp " + data.money
+        rupiah: "Rp " + data.money
       });
     });
   }
@@ -60,7 +60,7 @@ function TableResult(props) {
               {
                 key: amountLeft,
                 no: "Amount Left",
-                cash: "Rp " + amountLeft
+                rupiah: "Rp " + amountLeft
               }
             ]}
             columns={[
@@ -72,11 +72,11 @@ function TableResult(props) {
                 render: no => <span style={amountLeftStyles}>{no}</span>
               },
               {
-                title: "Cash",
-                dataIndex: "cash",
-                key: "cash",
+                title: "Rupiah",
+                dataIndex: "rupiah",
+                key: "rupiah",
                 width: 100,
-                render: cash => <span style={amountLeftStyles}>{cash}</span>
+                render: rupiah => <span style={amountLeftStyles}>{rupiah}</span>
               }
             ]}
           />
