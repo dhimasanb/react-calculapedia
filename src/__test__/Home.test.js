@@ -28,8 +28,8 @@ describe("Home", () => {
     const amount = "50000";
     const amountLeft = 0;
     const result = {
-      money: 50000,
-      total: 1
+      rupiah: 50000,
+      quantity: 1
     };
 
     beforeEach(() => {
@@ -46,6 +46,7 @@ describe("Home", () => {
       beforeEach(() => wrapper.find("#btn-calculate").simulate("click"));
 
       it("setelah klik mhasilnya adalah", () => {
+        expect(wrapper.state().error).toBe(false);
         expect(wrapper.state().amountLeft).toBe(amountLeft);
         expect(wrapper.state().result).toContainEqual(result);
       });
@@ -57,6 +58,7 @@ describe("Home", () => {
       );
 
       it("setelah klik mhasilnya adalah", () => {
+        expect(wrapper.state().error).toBe(false);
         expect(wrapper.state().amountLeft).toBe(amountLeft);
         expect(wrapper.state().result).toContainEqual(result);
       });

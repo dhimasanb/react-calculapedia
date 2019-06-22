@@ -41,3 +41,21 @@ export function validationAmount(amount) {
 
   return parseInt(amount);
 }
+
+export function convertToRupiah(amount) {
+  let rupiah = "";
+  let numberRev = amount
+    .toString()
+    .split("")
+    .reverse()
+    .join("");
+  for (let i = 0; i < numberRev.length; i++)
+    if (i % 3 === 0) rupiah += numberRev.substr(i, 3) + ".";
+  return (
+    "Rp" +
+    rupiah
+      .split("", rupiah.length - 1)
+      .reverse()
+      .join("")
+  );
+}

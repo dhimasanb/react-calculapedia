@@ -41,8 +41,9 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
-      "!src/serviceWorker.js",
-      "!src/tempPolyfills.js"
+      "!src/scenes/Home/components/**/*.js",
+      "!src/utils/*.js",
+      "!src/serviceWorker.js"
     ],
     "coverageReporters": [
       "lcov",

@@ -64,7 +64,7 @@ class Home extends Component {
     // Result sorting by descending
     let resultByOrder = temp.length - 1;
     temp.forEach((value, key) => {
-      result[resultByOrder] = { money: key, total: value };
+      result[resultByOrder] = { rupiah: key, quantity: value };
       resultByOrder--;
     });
 
