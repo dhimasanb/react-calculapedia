@@ -10,15 +10,15 @@ const TableResult = props => {
   const { data, amountLeft } = props;
 
   // Result data fractions
-  let dataSource = [];
+  const dataSource = [];
   let number = 1;
   if (data && data.length > 0) {
-    data.map((data, index) => {
+    data.map((value, index) => {
       return dataSource.push({
         key: index,
-        no: number++,
-        quantity: data.quantity,
-        rupiah: convertToRupiah(data.rupiah)
+        no: (number += 1),
+        quantity: value.quantity,
+        rupiah: convertToRupiah(value.rupiah)
       });
     });
   }
@@ -53,10 +53,10 @@ const TableResult = props => {
               }
             ]}
             columns={[
-              column("No", "no", 200, (no) => (
+              column("No", "no", 200, no => (
                 <span className="amount-left">{no}</span>
               )),
-              column("Rupiah", "rupiah", 100, (rupiah) => (
+              column("Rupiah", "rupiah", 100, rupiah => (
                 <span className="amount-left">{rupiah}</span>
               ))
             ]}

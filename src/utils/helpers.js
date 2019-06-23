@@ -1,6 +1,6 @@
 // Validation amount
-export function validationAmount(amount) {
-  amount = amount.toLowerCase();
+export function validationAmount(amountParam) {
+  let amount = amountParam.toLowerCase();
 
   // Check there is 'rp' word
   if (amount.indexOf("rp") > -1) {
@@ -15,17 +15,19 @@ export function validationAmount(amount) {
         error: true,
         message: "Missing value"
       };
-    } else if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
-      // Check Rp is wrong position
+    }
+
+    // Check Rp is wrong position
+    if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
       return {
         error: true,
         message: "Valid character in wrong position"
       };
-    } else {
-      amount = rpSplit[1].replace(/\s+/g, "");
     }
+
+    amount = rpSplit[1].replace(/\s+/g, "");
   }
-  
+
   if (amount.indexOf(".") > -1) {
     amount = amount.replace(".", "");
   }
@@ -40,24 +42,21 @@ export function validationAmount(amount) {
     }
   }
 
-  return parseInt(amount);
+  return parseInt(amount, 10);
 }
 
 // Convert to rupiah
 export function convertToRupiah(amount) {
   let rupiah = "";
-  let numberRev = amount
+  const numberRev = amount
     .toString()
     .split("")
     .reverse()
     .join("");
-  for (let i = 0; i < numberRev.length; i++)
-    if (i % 3 === 0) rupiah += numberRev.substr(i, 3) + ".";
-  return (
-    "Rp" +
-    rupiah
-      .split("", rupiah.length - 1)
-      .reverse()
-      .join("")
-  );
+  for (let i = 0; i < numberRev.length; i += 1)
+    if (i % 3 === 0) rupiah += `${numberRev.substr(i, 3)}.`;
+  return `Rp${rupiah
+    .split("", rupiah.length - 1)
+    .reverse()
+    .join("")}`;
 }

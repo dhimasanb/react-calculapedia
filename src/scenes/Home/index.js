@@ -27,9 +27,9 @@ class Home extends Component {
 
   // Function to calculate fraction rupiah
   calculateFractions = () => {
-    let amount = this.state.amount;
-    let temp = [];
-    let result = [];
+    let { amount } = this.state;
+    const temp = [];
+    const result = [];
 
     // Function to validation amount
     const validatedAmount = validationAmount(amount);
@@ -45,10 +45,10 @@ class Home extends Component {
 
     // Calculate the fraction of rupiah currency
     while (amount >= 50) {
-      for (var i = 0; i < fractions.length; i++) {
+      for (let i = 0; i < fractions.length; i += 1) {
         if (amount >= fractions[i]) {
           temp[fractions[i]] = temp[fractions[i]] ? temp[fractions[i]] + 1 : 1;
-          amount = amount - fractions[i];
+          amount -= fractions[i];
           break;
         }
       }
@@ -58,10 +58,10 @@ class Home extends Component {
     let resultByOrder = temp.length - 1;
     temp.forEach((value, key) => {
       result[resultByOrder] = { rupiah: key, quantity: value };
-      resultByOrder--;
+      resultByOrder -= 1;
     });
 
-    this.setState({ amountLeft: amount, result: result });
+    return this.setState({ amountLeft: amount, result });
   };
 
   render() {
@@ -92,7 +92,6 @@ class Home extends Component {
               disabled={amount === ""}
               onClick={() => this.calculateFractions()}
               icon="calculator"
-              loading={this.state.loading}
             >
               Calculate
             </Button>
