@@ -72,7 +72,7 @@ class Home extends Component {
       <div style={{ textAlign: "center", paddingTop: "calc(50vh - 166px)" }}>
         <Row>
           <Col span={24}>
-            <Typography.Title>Fraction App</Typography.Title>
+            <Typography.Title>Calculapedia</Typography.Title>
           </Col>
         </Row>
         <Row>

@@ -33,6 +33,17 @@ const TableResult = props => {
     });
   }
 
+  // Column table
+  let column = (title, dataIndex, width, render) => {
+    return {
+      title,
+      dataIndex,
+      key: dataIndex,
+      width,
+      render
+    };
+  };
+
   return (
     <div style={styles.tableBox}>
       {/* Data Table */}
@@ -42,24 +53,9 @@ const TableResult = props => {
             pagination={false}
             dataSource={dataSource}
             columns={[
-              {
-                title: "No.",
-                dataIndex: "no",
-                key: "no",
-                width: 200
-              },
-              {
-                title: "Quantity",
-                dataIndex: "quantity",
-                key: "quantity",
-                width: 200
-              },
-              {
-                title: "Rupiah",
-                dataIndex: "rupiah",
-                key: "rupiah",
-                width: 200
-              }
+              column("No", "no", 200),
+              column("Quantity", "quantity", 200),
+              column("Rupiah", "rupiah", 200)
             ]}
           />
         </div>
@@ -78,22 +74,12 @@ const TableResult = props => {
               }
             ]}
             columns={[
-              {
-                title: "No.",
-                dataIndex: "no",
-                key: "no",
-                width: 200,
-                render: no => <span style={styles.amountLeft}>{no}</span>
-              },
-              {
-                title: "Rupiah",
-                dataIndex: "rupiah",
-                key: "rupiah",
-                width: 100,
-                render: rupiah => (
-                  <span style={styles.amountLeft}>{rupiah}</span>
-                )
-              }
+              column("No", "no", 200, no => (
+                <span style={styles.amountLeft}>{no}</span>
+              )),
+              column("Rupiah", "rupiah", 100, rupiah => (
+                <span style={styles.amountLeft}>{rupiah}</span>
+              ))
             ]}
           />
         </div>
