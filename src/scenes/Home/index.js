@@ -8,8 +8,7 @@ class Home extends Component {
   state = {
     amount: "",
     amountLeft: null,
-    error: false,
-    errorMessage: "",
+    error: "",
     result: []
   };
 
@@ -31,37 +30,36 @@ class Home extends Component {
     const temp = [];
     const result = [];
 
-    // Function to validation amount
-    const validatedAmount = validationAmount(amount);
+    try {
+      // Function to validation amount
+      const validatedAmount = validationAmount(amount);
 
-    if (validatedAmount.error) {
-      return this.setState({
-        error: validatedAmount.error,
-        errorMessage: validatedAmount.message
-      });
-    }
+      amount = validatedAmount;
 
-    amount = validatedAmount;
-
-    // Calculate the fraction of rupiah currency
-    while (amount >= 50) {
-      for (let i = 0; i < fractions.length; i += 1) {
-        if (amount >= fractions[i]) {
-          temp[fractions[i]] = temp[fractions[i]] ? temp[fractions[i]] + 1 : 1;
-          amount -= fractions[i];
-          break;
+      // Calculate the fraction of rupiah currency
+      while (amount >= 50) {
+        for (let i = 0; i < fractions.length; i += 1) {
+          if (amount >= fractions[i]) {
+            temp[fractions[i]] = temp[fractions[i]]
+              ? temp[fractions[i]] + 1
+              : 1;
+            amount -= fractions[i];
+            break;
+          }
         }
       }
+
+      // Result sorting by descending
+      let resultByOrder = temp.length - 1;
+      temp.forEach((value, key) => {
+        result[resultByOrder] = { rupiah: key, quantity: value };
+        resultByOrder -= 1;
+      });
+
+      return this.setState({ amountLeft: amount, result });
+    } catch (err) {
+      return this.setState({ error: err.message });
     }
-
-    // Result sorting by descending
-    let resultByOrder = temp.length - 1;
-    temp.forEach((value, key) => {
-      result[resultByOrder] = { rupiah: key, quantity: value };
-      resultByOrder -= 1;
-    });
-
-    return this.setState({ amountLeft: amount, result });
   };
 
   render() {

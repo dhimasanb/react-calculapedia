@@ -1,3 +1,29 @@
+// Check if there are ',' & '.' in a input and after ',' is not 00
+function checkSeparator(amount) {
+  if (amount.indexOf(",") > -1 || amount.indexOf(" ") > -1) {
+    if (amount.split(",")[1] !== "00") {
+      throw new Error("Invalid separator!");
+    }
+  }
+}
+
+// Check Rp is wrong position
+function checkRpPosition(rpSplit) {
+  if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
+    throw new Error("Valid character in wrong position");
+  }
+}
+
+// Check amount is only Rp
+function checkOnlyRp(rpSplit) {
+  if (
+    rpSplit[0].replace(/\s+/g, "") === "" &&
+    rpSplit[rpSplit.length - 1].replace(" ", "") === ""
+  ) {
+    throw new Error("Missing value");
+  }
+}
+
 // Validation amount
 export function validationAmount(amountParam) {
   let amount = amountParam.toLowerCase();
@@ -5,26 +31,8 @@ export function validationAmount(amountParam) {
   // Check there is 'rp' word
   if (amount.indexOf("rp") > -1) {
     const rpSplit = amount.split("rp");
-
-    // Check amount is only Rp
-    if (
-      rpSplit[0].replace(/\s+/g, "") === "" &&
-      rpSplit[rpSplit.length - 1].replace(" ", "") === ""
-    ) {
-      return {
-        error: true,
-        message: "Missing value"
-      };
-    }
-
-    // Check Rp is wrong position
-    if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
-      return {
-        error: true,
-        message: "Valid character in wrong position"
-      };
-    }
-
+    if (checkOnlyRp(rpSplit));
+    if (checkRpPosition(rpSplit));
     amount = rpSplit[1].replace(/\s+/g, "");
   }
 
@@ -32,15 +40,7 @@ export function validationAmount(amountParam) {
     amount = amount.replace(".", "");
   }
 
-  // Check if there are ',' & '.' in a input and after ',' is not 00
-  if (amount.indexOf(",") > -1 || amount.indexOf(" ") > -1) {
-    if (amount.split(",")[1] !== "00") {
-      return {
-        error: true,
-        message: "Invalid separator!"
-      };
-    }
-  }
+  if (checkSeparator(amount));
 
   return parseInt(amount, 10);
 }

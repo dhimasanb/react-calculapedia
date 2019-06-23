@@ -1,3 +1,4 @@
+/* global describe, it, expect, beforeEach :true */
 import React from "react";
 import { shallow, configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -33,12 +34,6 @@ describe("Home Scene", () => {
     });
   }
 
-  function errorMessageState(errorMessage) {
-    it(`error message is ${errorMessage}`, () => {
-      expect(wrapper.state().errorMessage).toEqual(errorMessage);
-    });
-  }
-
   // Event
   function inputAmount(amount) {
     beforeEach(() => {
@@ -65,34 +60,30 @@ describe("Home Scene", () => {
 
     describe("click button calculate", () => {
       btnCalculateClick();
-      errorState(false);
       resultState(result);
       amountLeftState(amountLeft);
     });
 
     describe("press enter key", () => {
       enterKey();
-      errorState(false);
       resultState(result);
       amountLeftState(amountLeft);
     });
   }
 
   // Invalid input function
-  function invalidInput(amount, error, errorMessage) {
+  function invalidInput(amount, error) {
     inputAmount(amount);
     updateState(amount);
 
     describe("click button calculate", () => {
       btnCalculateClick();
       errorState(error);
-      errorMessageState(errorMessage);
     });
 
     describe("press enter key", () => {
       enterKey();
       errorState(error);
-      errorMessageState(errorMessage);
     });
   }
 
@@ -106,15 +97,14 @@ describe("Home Scene", () => {
     expect(wrapper.state()).toEqual({
       amount: "",
       amountLeft: null,
-      error: false,
-      errorMessage: "",
+      error: '',
       result: []
     });
   });
 
   // Valid input test
   describe("valid inputs with their canonical equivalents", () => {
-    let objectResult = (rupiah, quantity) => {
+    const objectResult = (rupiah, quantity) => {
       return { rupiah, quantity };
     };
 
@@ -170,8 +160,8 @@ describe("Home Scene", () => {
       }
     ];
 
-    validInputs.forEach((input) => {
-      describe(`input: ${input.amount}`, () => {
+    validInputs.forEach(input => {
+      describe(`valid input: ${input.amount}`, () => {
         validInput(input.amount, input.result, input.amountLeft);
       });
     });
@@ -182,34 +172,29 @@ describe("Home Scene", () => {
     const invalidInputs = [
       {
         amount: "17,500",
-        error: true,
-        message: "Invalid separator!"
+        error: "Invalid separator!"
       },
       {
         amount: "2 500",
-        error: true,
-        message: "Invalid separator!"
+        error: "Invalid separator!"
       },
       {
         amount: "3000 Rp",
-        error: true,
-        message: "Valid character in wrong position"
+        error: "Valid character in wrong position"
       },
       {
         amount: "3000 Rp",
-        error: true,
-        message: "Valid character in wrong position"
+        error: "Valid character in wrong position"
       },
       {
         amount: "Rp",
-        error: true,
-        message: "Missing value"
+        error: "Missing value"
       }
     ];
 
-    invalidInputs.forEach((input) => {
-      describe(`input: ${input.amount}`, () => {
-        invalidInput(input.amount, input.error, input.message);
+    invalidInputs.forEach(input => {
+      describe(`invalid input: ${input.amount}`, () => {
+        invalidInput(input.amount, input.error);
       });
     });
   });
