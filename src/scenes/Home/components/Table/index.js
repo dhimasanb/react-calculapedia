@@ -10,7 +10,9 @@ const TableResult = props => {
       marginTop: 15
     },
     amountLeft: {
-      color: "#fa541c" // volcano-6
+      // Volcano-6
+      // Reference : https://ant.design/docs/spec/colors
+      color: "#fa541c"
     }
   };
 

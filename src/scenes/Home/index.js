@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button, Typography, Row, Col, message } from "antd/lib";
+import { Input, Button, Typography, Row, Col } from "antd/lib";
 import TableResult from "./components/Table";
 import { validationAmount } from "../../utils/helpers";
 import { fractions } from "../../config/fractions";
@@ -12,13 +12,6 @@ class Home extends Component {
     errorMessage: "",
     result: []
   };
-
-  // componentDidUpdate() {
-  //   // Check if input
-  //   if (this.state.error) {
-  //     message.error(this.state.errorMessage, 5);
-  //   }
-  // }
 
   // Event update the react state when user types
   handleChange = name => event => {
@@ -50,7 +43,7 @@ class Home extends Component {
 
     amount = validatedAmount;
 
-    // Calculate the minimun fraction of rupiah currency
+    // Calculate the fraction of rupiah currency
     while (amount >= 50) {
       for (var i = 0; i < fractions.length; i++) {
         if (amount >= fractions[i]) {
@@ -72,6 +65,7 @@ class Home extends Component {
   };
 
   render() {
+    // Object destructuring
     const { amount, result, amountLeft } = this.state;
 
     return (

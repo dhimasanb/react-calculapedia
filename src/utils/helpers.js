@@ -1,11 +1,12 @@
+// Validation amount
 export function validationAmount(amount) {
   amount = amount.toLowerCase();
 
-  // check if there is 'rp' word
+  // Check there is 'rp' word
   if (amount.indexOf("rp") > -1) {
     const rpSplit = amount.split("rp");
 
-    // check if amount is only Rp
+    // Check amount is only Rp
     if (
       rpSplit[0].replace(/\s+/g, "") === "" &&
       rpSplit[rpSplit.length - 1].replace(" ", "") === ""
@@ -15,11 +16,11 @@ export function validationAmount(amount) {
         message: "Missing value"
       };
     } else if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
-      // check if Rp is wrong position
+      // Check Rp is wrong position
 
       return {
         error: true,
-        message: "Valid character in wrong position!"
+        message: "Valid character in wrong position"
       };
     } else {
       amount = rpSplit[1].replace(/\s+/g, "");
@@ -29,7 +30,7 @@ export function validationAmount(amount) {
     amount = amount.replace(".", "");
   }
 
-  // check if there are ',' & '.' in a input and after ',' is not 00
+  // Check if there are ',' & '.' in a input and after ',' is not 00
   if (amount.indexOf(",") > -1 || amount.indexOf(" ") > -1) {
     if (amount.split(",")[1] !== "00") {
       return {
@@ -42,6 +43,7 @@ export function validationAmount(amount) {
   return parseInt(amount);
 }
 
+// Convert to rupiah
 export function convertToRupiah(amount) {
   let rupiah = "";
   let numberRev = amount
