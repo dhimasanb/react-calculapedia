@@ -17,7 +17,6 @@ export function validationAmount(amount) {
       };
     } else if (rpSplit[rpSplit.length - 1].replace(/\s+/g, "") === "") {
       // Check Rp is wrong position
-
       return {
         error: true,
         message: "Valid character in wrong position"
@@ -26,6 +25,7 @@ export function validationAmount(amount) {
       amount = rpSplit[1].replace(/\s+/g, "");
     }
   }
+  
   if (amount.indexOf(".") > -1) {
     amount = amount.replace(".", "");
   }

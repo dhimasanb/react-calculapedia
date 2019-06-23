@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow, configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { validInputs, invalidInputs } from "../config/input";
 import Home from "../scenes/Home";
 
 configure({ adapter: new Adapter() });
@@ -115,7 +114,63 @@ describe("Home Scene", () => {
 
   // Valid input test
   describe("valid inputs with their canonical equivalents", () => {
-    validInputs.forEach(input => {
+    let objectResult = (rupiah, quantity) => {
+      return { rupiah, quantity };
+    };
+
+    const validInputs = [
+      {
+        amount: "18.215",
+        result: [
+          objectResult(10000, 1),
+          objectResult(5000, 1),
+          objectResult(1000, 3),
+          objectResult(100, 2)
+        ],
+        amountLeft: 15
+      },
+      {
+        amount: "Rp17500",
+        result: [
+          objectResult(10000, 1),
+          objectResult(5000, 1),
+          objectResult(1000, 2),
+          objectResult(500, 1)
+        ],
+        amountLeft: 0
+      },
+      {
+        amount: "Rp17.500,00",
+        result: [
+          objectResult(10000, 1),
+          objectResult(5000, 1),
+          objectResult(1000, 2),
+          objectResult(500, 1)
+        ],
+        amountLeft: 0
+      },
+      {
+        amount: "Rp 120.325",
+        result: [
+          objectResult(100000, 1),
+          objectResult(20000, 1),
+          objectResult(100, 3)
+        ],
+        amountLeft: 25
+      },
+      {
+        amount: "005.000",
+        result: [objectResult(5000, 1)],
+        amountLeft: 0
+      },
+      {
+        amount: "001000",
+        result: [objectResult(1000, 1)],
+        amountLeft: 0
+      }
+    ];
+
+    validInputs.forEach((input) => {
       describe(`input: ${input.amount}`, () => {
         validInput(input.amount, input.result, input.amountLeft);
       });
@@ -124,7 +179,35 @@ describe("Home Scene", () => {
 
   // Invalid input teest
   describe("invalid inputs", () => {
-    invalidInputs.forEach(input => {
+    const invalidInputs = [
+      {
+        amount: "17,500",
+        error: true,
+        message: "Invalid separator!"
+      },
+      {
+        amount: "2 500",
+        error: true,
+        message: "Invalid separator!"
+      },
+      {
+        amount: "3000 Rp",
+        error: true,
+        message: "Valid character in wrong position"
+      },
+      {
+        amount: "3000 Rp",
+        error: true,
+        message: "Valid character in wrong position"
+      },
+      {
+        amount: "Rp",
+        error: true,
+        message: "Missing value"
+      }
+    ];
+
+    invalidInputs.forEach((input) => {
       describe(`input: ${input.amount}`, () => {
         invalidInput(input.amount, input.error, input.message);
       });

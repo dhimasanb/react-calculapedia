@@ -1,21 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Table } from "antd/lib";
+import { column } from "./column";
 import { convertToRupiah } from "../../../../utils/helpers";
+import "./index.css";
 
 const TableResult = props => {
-  // Styles
-  const styles = {
-    tableBox: {
-      marginTop: 15
-    },
-    amountLeft: {
-      // Volcano-6
-      // Reference : https://ant.design/docs/spec/colors
-      color: "#fa541c"
-    }
-  };
-
   // Object desctructuring
   const { data, amountLeft } = props;
 
@@ -33,19 +23,8 @@ const TableResult = props => {
     });
   }
 
-  // Column table
-  let column = (title, dataIndex, width, render) => {
-    return {
-      title,
-      dataIndex,
-      key: dataIndex,
-      width,
-      render
-    };
-  };
-
   return (
-    <div style={styles.tableBox}>
+    <div className="table-box">
       {/* Data Table */}
       {data && data.length > 0 && (
         <div>
@@ -62,7 +41,7 @@ const TableResult = props => {
       )}
       {/* Amount Left Table */}
       {amountLeft > 0 && (
-        <div style={styles.tableBox}>
+        <div className="table-box">
           <Table
             showHeader={false}
             pagination={false}
@@ -74,11 +53,11 @@ const TableResult = props => {
               }
             ]}
             columns={[
-              column("No", "no", 200, no => (
-                <span style={styles.amountLeft}>{no}</span>
+              column("No", "no", 200, (no) => (
+                <span className="amount-left">{no}</span>
               )),
-              column("Rupiah", "rupiah", 100, rupiah => (
-                <span style={styles.amountLeft}>{rupiah}</span>
+              column("Rupiah", "rupiah", 100, (rupiah) => (
+                <span className="amount-left">{rupiah}</span>
               ))
             ]}
           />
