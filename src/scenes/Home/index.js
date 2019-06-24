@@ -59,7 +59,11 @@ class Home extends Component {
       return this.setState({ amountLeft: amount, result });
     } catch (e) {
       message.error(e.message);
-      return this.setState({ error: e.message });
+      return this.setState({
+        amountLeft: null,
+        error: e.message,
+        result: null
+      });
     }
   };
 

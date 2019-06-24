@@ -3,15 +3,12 @@
 .app {
   background-color: #ffffff;
   text-align: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
+  min-height: 100vh;
 }
 
 .box {
   max-width: 600px;
   margin: auto;
+  margin-bottom: 15px;
   padding: auto;
 }

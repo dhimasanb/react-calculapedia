@@ -8,7 +8,7 @@ import "./index.css";
 const TableResult = ({ data, amountLeft }) => {
   // Result data fractions
   const dataSource = [];
-  let number = 1;
+  let number = 0;
   if (data && data.length > 0) {
     data.map((value, index) => {
       return dataSource.push({
