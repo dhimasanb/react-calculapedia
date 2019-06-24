@@ -1,5 +1,5 @@
 // Column table
-export const column = (title, dataIndex, width, render) => {
+export default function column(title, dataIndex, width, render) {
   return {
     title,
     dataIndex,
@@ -7,4 +7,4 @@ export const column = (title, dataIndex, width, render) => {
     width,
     render
   };
-};
+}

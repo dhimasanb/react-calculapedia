@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, Button, Typography, Row, Col } from "antd/lib";
-import TableResult from "./components/Table";
+import TableResult from "./components/TableResult";
 import { validationAmount } from "../../utils/helpers";
 import { fractions } from "../../config/fractions";
 

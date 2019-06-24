@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Table } from "antd/lib";
-import { column } from "./column";
 import { convertToRupiah } from "../../../../utils/helpers";
+import column from "./column";
 import "./index.css";
 
 const TableResult = props => {

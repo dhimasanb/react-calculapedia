@@ -9,28 +9,32 @@ configure({ adapter: new Adapter() });
 describe("Home Scene", () => {
   const wrapper = shallow(<Home />);
 
+  function stateToEqual(fn, expectedValue) {
+    expect(fn).toEqual(expectedValue);
+  }
+
   // Home State
   function updateState(amount) {
     it(`updates the amount ${amount} in state`, () => {
-      expect(wrapper.state().amount).toEqual(amount);
+      stateToEqual(wrapper.state().amount, amount);
     });
   }
 
   function resultState(result) {
     it(`result is ${result}`, () => {
-      expect(wrapper.state().result).toEqual(expect.arrayContaining(result));
+      stateToEqual(wrapper.state().result, expect.arrayContaining(result));
     });
   }
 
   function amountLeftState(amountLeft) {
     it(`amount left is ${amountLeft}`, () => {
-      expect(wrapper.state().amountLeft).toBe(amountLeft);
+      stateToEqual(wrapper.state().amountLeft, amountLeft);
     });
   }
 
   function errorState(error) {
     it(`error ${error}`, () => {
-      expect(wrapper.state().error).toBe(error);
+      stateToEqual(wrapper.state().error, error);
     });
   }
 
@@ -97,7 +101,7 @@ describe("Home Scene", () => {
     expect(wrapper.state()).toEqual({
       amount: "",
       amountLeft: null,
-      error: '',
+      error: "",
       result: []
     });
   });
