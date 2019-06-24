@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button, Typography, Row, Col } from "antd/lib";
+import { Input, Button, Typography, Row, Col } from "antd";
 import TableResult from "./components/TableResult";
 import { validationAmount } from "../../utils/helpers";
 import { fractions } from "../../config/fractions";
@@ -58,7 +58,8 @@ class Home extends Component {
 
       return this.setState({ amountLeft: amount, result });
     } catch (err) {
-      return this.setState({ error: err.message });
+      this.setState({ error: err.message });
+      return false;
     }
   };
 

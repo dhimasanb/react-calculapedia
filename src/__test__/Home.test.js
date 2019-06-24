@@ -124,11 +124,11 @@ describe("Home Scene", () => {
         amountLeft: 15
       },
       {
-        amount: "Rp17500",
+        amount: "Rp18500",
         result: [
           objectResult(10000, 1),
           objectResult(5000, 1),
-          objectResult(1000, 2),
+          objectResult(1000, 3),
           objectResult(500, 1)
         ],
         amountLeft: 0
