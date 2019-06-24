@@ -2,7 +2,8 @@ import React from "react";
 import { Table } from "antd";
 import column from "./column";
 
-const dataTable = dataSource => {
+const dataTable = ({ dataSource }) => {
+
   return (
     <Table
       pagination={false}

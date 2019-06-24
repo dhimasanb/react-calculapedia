@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button, Typography, Row, Col } from "antd";
+import { Input, Button, Typography, Row, Col, message } from "antd";
 import TableResult from "./components/TableResult";
 import { validationAmount } from "../../utils/helpers";
 import { fractions } from "../../config/fractions";
@@ -57,9 +57,9 @@ class Home extends Component {
       });
 
       return this.setState({ amountLeft: amount, result });
-    } catch (err) {
-      this.setState({ error: err.message });
-      return false;
+    } catch (e) {
+      message.error(e.message);
+      return this.setState({ error: e.message });
     }
   };
 
@@ -80,6 +80,7 @@ class Home extends Component {
               id="input-amount"
               placeholder="Please input amount of money :)"
               value={amount}
+              maxLength={16}
               onChange={this.handleChange("amount")}
               onKeyPress={this.handleKeyPressEnter}
             />

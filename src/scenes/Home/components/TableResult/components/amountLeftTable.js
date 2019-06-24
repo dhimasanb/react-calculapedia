@@ -3,7 +3,8 @@ import { Table } from "antd";
 import { convertToRupiah } from "../../../../../utils/helpers";
 import column from "./column";
 
-const amountLeftTable = amountLeft => {
+const amountLeftTable = ({ amountLeft }) => {
+
   return (
     <Table
       showHeader={false}

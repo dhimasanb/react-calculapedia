@@ -5,13 +5,13 @@ import "./App.css";
 
 const App = () => {
   return (
-    <Layout className="App">
+    <Layout className="app">
       <Layout.Content>
         <div className="box">
           <Home />
         </div>
       </Layout.Content>
-      <Layout.Footer>
+      <Layout.Footer className="footer">
         <Icon type="code" /> with <Icon type="heart" /> by
         <a href="https://github.com/dhimasanb"> @dhimasanb</a>
       </Layout.Footer>

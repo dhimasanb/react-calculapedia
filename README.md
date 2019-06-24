@@ -12,7 +12,7 @@
 
 ## Live Demo
 
-**<https://dhimasanb.js.org>**
+**<https://calculapedia.herokuapp.com>**
 
 ## Screenshot
 

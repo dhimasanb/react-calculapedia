@@ -5,10 +5,7 @@ import DataTable from "./components/dataTable";
 import AmountLeftTable from "./components/amountLeftTable";
 import "./index.css";
 
-const TableResult = props => {
-  // Object desctructuring
-  const { data, amountLeft } = props;
-
+const TableResult = ({ data, amountLeft }) => {
   // Result data fractions
   const dataSource = [];
   let number = 1;
