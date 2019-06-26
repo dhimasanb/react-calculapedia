@@ -84,7 +84,7 @@ class Home extends Component {
               id="input-amount"
               placeholder="Please input amount of money :)"
               value={amount}
-              maxLength={16}
+              maxLength={12}
               onChange={this.handleChange("amount")}
               onKeyPress={this.handleKeyPressEnter}
             />

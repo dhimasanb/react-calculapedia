@@ -20,7 +20,7 @@
 
 ## Tutorial
 
-[https://medium.com/@dhimasanb](https://medium.com/@dhimasanb)
+[https://medium.com/@dhimasanb](https://medium.com/@dhimasanb/membuat-aplikasi-penghitung-pecahan-rupiah-menggunakan-reactjs-4edb43f9bdb)
 
 ## Setup
 
